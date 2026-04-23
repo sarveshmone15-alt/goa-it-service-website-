@@ -1,58 +1,53 @@
-name: Azure Static Web Apps CI/CD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goa IT Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    <!-- CSS -->
+    style.css
+</head>
+<body>
 
-jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build and Deploy Job
-    permissions:
-       id-token: write
-       contents: read
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
-        with:
-           script: |
-               const coredemo = require('@actions/core')
-               return await coredemo.getIDToken()
-           result-encoding: string
-      - name: Build And Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_WATER_0729B7F00 }}
-          action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "." # Built app content directory - optional
-          github_id_token: ${{ steps.idtoken.outputs.result }}
-          ###### End of Repository/Build Configurations ######
+    <header>
+        <h1>Goa IT Service</h1>
+        <p>Your Trusted IT Solutions Partner</p>
+    </header>
 
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          action: "close"
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>
+                Goa IT Service provides reliable IT solutions including
+                networking, cloud services, and website hosting.
+                We help businesses grow with modern technology.
+            </p>
+        </section>
+
+        <section>
+            <h2>Our Services</h2>
+            <ul>
+                <li>IT Support & Networking</li>
+                <li>Cloud & Azure Services</li>
+                <li>Website Hosting</li>
+                <li>Technical Consulting</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>Email: contact@goaitservice.com</p>
+            <button onclick="showMessage()">Get in Touch</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Goa IT Service. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    script.js
+
+</body>
+</html>
